@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using WebApplicationLogin.Helpers;
 
 [assembly: OwinStartupAttribute(typeof(WebApplicationLogin.Startup))]
 namespace WebApplicationLogin
@@ -9,6 +10,7 @@ namespace WebApplicationLogin
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            StartupHelper.SetDefaultRolesIfNotExists();
         }
     }
 }
