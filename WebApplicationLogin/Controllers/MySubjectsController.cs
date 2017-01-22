@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -33,6 +34,7 @@ namespace WebApplicationLogin.Controllers
             {
                 return HttpNotFound();
             }
+            
             return View(mySubject);
         }
 
@@ -53,13 +55,14 @@ namespace WebApplicationLogin.Controllers
         {
             if (ModelState.IsValid)
             {
+                mySubject.FilePathEdu = SaveFile(Request.Files[0]);
                 db.MySubjects.Add(mySubject);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "Name", mySubject.SubjectID);
-            //ViewBag.userID = new SelectList(db.ApplicationUsers, "Id", "Name", mySubject.userID);
+            ViewBag.userID = new SelectList(db.ApplicationUsers, "Id", "Name", mySubject.userID);
             return View(mySubject);
         }
 
@@ -76,7 +79,8 @@ namespace WebApplicationLogin.Controllers
                 return HttpNotFound();
             }
             ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "Name", mySubject.SubjectID);
-            //ViewBag.userID = new SelectList(db.ApplicationUsers, "Id", "Name", mySubject.userID);
+            ViewBag.userID = new SelectList(db.ApplicationUsers, "Id", "Name", mySubject.userID);
+
             return View(mySubject);
         }
 
@@ -89,12 +93,14 @@ namespace WebApplicationLogin.Controllers
         {
             if (ModelState.IsValid)
             {
+                mySubject.FilePathEdu = SaveFile(Request.Files[0]);
+                //db.MySubjects.Add(mySubject);
                 db.Entry(mySubject).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "Name", mySubject.SubjectID);
-            //ViewBag.userID = new SelectList(db.ApplicationUsers, "Id", "Name", mySubject.userID);
+            ViewBag.userID = new SelectList(db.ApplicationUsers, "Id", "Name", mySubject.userID);
             return View(mySubject);
         }
 
@@ -131,6 +137,21 @@ namespace WebApplicationLogin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //funkcja zapisujaca plik
+        private string SaveFile(HttpPostedFileBase file)
+        {
+            string targetFolder = HttpContext.Server.MapPath("~/uploads");
+            string targetPath = Path.Combine(targetFolder, file.FileName);
+            file.SaveAs(targetPath);
+            return targetPath;
+        }
+
+        //pobieranie pliku by go odczytac
+        public ActionResult Download(HttpPostedFileBase file)
+        {
+            return File(@"~\uploads", "application/text", file.FileName);
         }
     }
 }

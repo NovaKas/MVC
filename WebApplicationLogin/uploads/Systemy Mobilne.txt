@@ -1,0 +1,3 @@
+.zip
+
+katalog App bez Build
