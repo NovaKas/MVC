@@ -190,6 +190,10 @@
     <Compile Include="Migrations\201701221728345_Add_file_path_column_to_subject_table.Designer.cs">
       <DependentUpon>201701221728345_Add_file_path_column_to_subject_table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701222017223_Add_file_pathEdu_column_to_Mysubject_table.cs" />
+    <Compile Include="Migrations\201701222017223_Add_file_pathEdu_column_to_Mysubject_table.Designer.cs">
+      <DependentUpon>201701222017223_Add_file_pathEdu_column_to_Mysubject_table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Grade.cs" />
@@ -325,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701221728345_Add_file_path_column_to_subject_table.resx">
       <DependentUpon>201701221728345_Add_file_path_column_to_subject_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701222017223_Add_file_pathEdu_column_to_Mysubject_table.resx">
+      <DependentUpon>201701222017223_Add_file_pathEdu_column_to_Mysubject_table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
