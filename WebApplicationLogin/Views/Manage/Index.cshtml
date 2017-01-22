@@ -1,4 +1,5 @@
 ﻿@model WebApplicationLogin.Models.IndexViewModel
+@using WebApplicationLogin.Models;
 @{
     ViewBag.Title = "Manage";
 }
@@ -16,7 +17,7 @@
             @if (Model.HasPassword)
             {
                 @Html.ActionLink("Change your password", "ChangePassword")
-               
+
             }
             else
             {
@@ -24,28 +25,13 @@
             }
             ]
         </dd>
-        <dt>Account Status(przypisane role): </dt>
-        <dd>
-            [@using (Html.BeginForm("GetRoles", "Roles")) { }
-
-            @if (ViewBag.RolesForThisUser != null)
-            {
-                <div style="background-color:yellow;">
-                    <ol>
-                        @foreach (string s in ViewBag.RolesForThisUser)
-                        {
-                            <li>@s</li>
-                        }
-                    </ol>
-                </div>
-            }
-            ]
-        </dd>
+        <dt>Login:</dt>
+        <dd>@User.Identity.Name</dd>
         <dt>Nazwisko:</dt>
-        <dd>[]</dd>
+        <dd>@User.GetMySurname()</dd>
         <dt>Imie:</dt>
-        <dd>[]</dd>
+        <dd>@User.GetMyFullName()</dd>
         <dt>Email:</dt>
-        <dd>[]</dd>
+        <dd>@User.GetMyEmail()</dd>
     </dl>
 </div>

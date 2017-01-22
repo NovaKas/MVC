@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections;
+using System.Security.Principal;
 
 namespace WebApplicationLogin.Models
 {
@@ -17,6 +18,9 @@ namespace WebApplicationLogin.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+            userIdentity.AddClaim(new Claim("FullName", this.Name));
+            userIdentity.AddClaim(new Claim("Surname", this.Surname));
+            userIdentity.AddClaim(new Claim("Email", this.Email));
             return userIdentity;
         }
         [Display(Name = "Imię ")]
@@ -56,7 +60,7 @@ namespace WebApplicationLogin.Models
         public DbSet<News> Newses { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Quiz> Quizs { get; set; }
-        
+
         //visualowa podpowiedz
         public IEnumerable ApplicationUsers { get; internal set; }
     }
@@ -171,6 +175,60 @@ namespace WebApplicationLogin.Models
             {
                 um.RemoveFromRole(userId, role.RoleId);
             }
+        }
+
+    }
+
+    public static class GenericPrincipalExtensions
+
+    {
+        public static string GetMySurname(this IPrincipal user)
+        {
+            if (user.Identity.IsAuthenticated)
+            {
+                ClaimsIdentity claimsIdentity = user.Identity as ClaimsIdentity;
+                foreach (var claim in claimsIdentity.Claims)
+                {
+                    if (claim.Type == "Surname")
+                        return claim.Value;
+                }
+                return "XYZ";
+            }
+            else
+                return "XYZ1";
+        }
+
+        public static string GetMyFullName(this IPrincipal user)
+        {
+            if (user.Identity.IsAuthenticated)
+            {
+                ClaimsIdentity claimsIdentity = user.Identity as ClaimsIdentity;
+                foreach (var claim in claimsIdentity.Claims)
+                {
+                    if (claim.Type == "FullName")
+                        return claim.Value;
+                }
+                return "XYZ";
+            }
+            else
+                return "XYZ1";
+        }
+
+        public static string GetMyEmail(this IPrincipal user)
+        {
+            if (user.Identity.IsAuthenticated)
+            {
+                ClaimsIdentity claimsIdentity = user.Identity as ClaimsIdentity;
+                foreach (var claim in claimsIdentity.Claims)
+                {
+                    if (claim.Type == "Email")
+                        return claim.Value;
+                }
+                return "XYZ";
+            }
+            else
+                return "XYZ1";
+
         }
     }
 }

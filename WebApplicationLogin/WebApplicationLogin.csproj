@@ -186,6 +186,10 @@
     <Compile Include="Migrations\201701221405315_initial.Designer.cs">
       <DependentUpon>201701221405315_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701221728345_Add_file_path_column_to_subject_table.cs" />
+    <Compile Include="Migrations\201701221728345_Add_file_path_column_to_subject_table.Designer.cs">
+      <DependentUpon>201701221728345_Add_file_path_column_to_subject_table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Grade.cs" />
@@ -301,9 +305,11 @@
     <Content Include="Views\Subjects\Details.cshtml" />
     <Content Include="Views\Subjects\Edit.cshtml" />
     <Content Include="Views\Subjects\Index.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -316,6 +322,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701221405315_initial.resx">
       <DependentUpon>201701221405315_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701221728345_Add_file_path_column_to_subject_table.resx">
+      <DependentUpon>201701221728345_Add_file_path_column_to_subject_table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

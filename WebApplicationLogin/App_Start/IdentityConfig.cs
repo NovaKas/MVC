@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using WebApplicationLogin.Models;
+using System.Net.Mail;
 
 namespace WebApplicationLogin
 {
@@ -18,9 +19,29 @@ namespace WebApplicationLogin
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
-        }
+            // Emails will be sent from this address
+            var from = "przychodniademo@gmail.com";
+            var pass = "projektjava";
+
+            // Setting up SMTP client
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential(from, pass);
+            client.EnableSsl = true;
+
+            // Create email
+            var mail = new MailMessage(from, message.Destination);
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+            mail.IsBodyHtml = true;
+
+            // Send email
+            return client.SendMailAsync(mail);
+
+        // Plug in your email service here to send an email.
+        //return Task.FromResult(0);
+    }
     }
 
     public class SmsService : IIdentityMessageService
@@ -54,10 +75,10 @@ namespace WebApplicationLogin
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequireLowercase = false,
+                RequireUppercase = false,
             };
 
             // Configure user lockout defaults

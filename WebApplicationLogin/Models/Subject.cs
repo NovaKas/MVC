@@ -13,6 +13,8 @@ namespace WebApplicationLogin.Models
         public int MySubjectID { get; set; }
         public int SClassID { get; set; }
 
+        public string FilePath { get; set; }
+
         public virtual ICollection<MySubject> MySubjects { get; set; }
         public virtual ICollection<SClass> SClasses { get; set; }
     }

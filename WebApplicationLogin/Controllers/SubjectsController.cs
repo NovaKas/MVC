@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,10 +47,12 @@ namespace WebApplicationLogin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SubjectID,Name,MySubjectID,SClassID")] Subject subject)
+        public ActionResult Create(Subject subject)
         {
             if (ModelState.IsValid)
             {
+                subject.FilePath = SaveFile(Request.Files[0]);
+
                 db.Subjects.Add(subject);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,6 +85,7 @@ namespace WebApplicationLogin.Controllers
         {
             if (ModelState.IsValid)
             {
+                subject.FilePath = SaveFile(Request.Files[0]);
                 db.Entry(subject).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -122,6 +126,14 @@ namespace WebApplicationLogin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private string SaveFile(HttpPostedFileBase file)
+        {
+            string targetFolder = HttpContext.Server.MapPath("~/uploads");
+            string targetPath = Path.Combine(targetFolder, file.FileName);
+            file.SaveAs(targetPath);
+            return targetPath;
         }
     }
 }

@@ -91,6 +91,18 @@ namespace WebApplicationLogin.Controllers
             }
         }
 
+        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            identity.AddClaim(new Claim("Name", user.Name));
+            identity.AddClaim(new Claim("Surname", user.Surname));
+            identity.AddClaim(new Claim("Email", user.Email));
+
+            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+        }
+
+
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -202,11 +214,11 @@ namespace WebApplicationLogin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                if (user == null) // || !(await UserManager.IsEmailConfirmedAsync(user.Id))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    return View("ForgotPasswordError");
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -248,7 +260,7 @@ namespace WebApplicationLogin.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
