@@ -14,5 +14,6 @@ namespace WebApplicationLogin.Models
         //public int QuestionID { get; set; }
 
         public virtual ICollection<Question> Questions { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

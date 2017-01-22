@@ -1,4 +1,4 @@
-﻿@model WebApplicationLogin.Models.Question
+﻿@model WebApplicationLogin.Models.ViewModels.QuestionViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -61,6 +61,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

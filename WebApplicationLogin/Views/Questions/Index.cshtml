@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplicationLogin.Models.Question>
+﻿@model IEnumerable<WebApplicationLogin.Models.ViewModels.QuestionViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -53,9 +53,9 @@
             @Html.DisplayFor(modelItem => item.Points)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.QuestionID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.QuestionID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.QuestionID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }
