@@ -1,0 +1,66 @@
+﻿@model WebApplicationLogin.Models.Grade
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Grade</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GradeList.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradeList.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateGrade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateGrade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MySubjectID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MySubjectID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GradeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

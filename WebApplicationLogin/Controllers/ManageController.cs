@@ -61,6 +61,7 @@ namespace WebApplicationLogin.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ChangeSuccess?"Successful change."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -243,6 +244,44 @@ namespace WebApplicationLogin.Controllers
             AddErrors(result);
             return View(model);
         }
+        /// <summary>
+        /// //
+        // GET: /Manage/ChangeSurname
+        public ActionResult ChangeSurname()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Manage/ChangeSurname
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeSurname(ChangeSurnameViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            //var res = await UserManager.DeleteAsync(User.Identity.GetUserId()) ;
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldSurname, model.NewSurname);
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                return RedirectToAction("Index", new { Message = ManageMessageId.ChangeSuccess });
+            }
+            AddErrors(result);
+            //AddErrors(res);
+            return View(model);
+        }
+
+        /// </summary>
+        /// <returns></returns>
+
+
 
         //
         // GET: /Manage/SetPassword
@@ -363,6 +402,28 @@ namespace WebApplicationLogin.Controllers
             return false;
         }
 
+        //dodany kod//////////////////////////////////////////////
+        private bool HasRole()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.Roles != null;
+            }
+            return false;
+        }
+
+        private bool HasSurname()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.Surname != null;
+            }
+            return false;
+        }
+        //to end////////////////////////////////////////////
+
         private bool HasPhoneNumber()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
@@ -381,7 +442,8 @@ namespace WebApplicationLogin.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
-            Error
+            Error,
+            ChangeSuccess
         }
 
 #endregion

@@ -8,6 +8,7 @@ namespace WebApplicationLogin.Models
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }
+        public bool HasSurname { get; set;}
         public IList<UserLoginInfo> Logins { get; set; }
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
@@ -57,8 +58,22 @@ namespace WebApplicationLogin.Models
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+//--------------------------------
+    public class ChangeSurnameViewModel
+    {
+        [Required]
+        [Display(Name = "Current surname")]
+    public string OldSurname { get; set; }
 
-    public class AddPhoneNumberViewModel
+    [Required]
+    [StringLength(100, ErrorMessage = "Cannot be empty", MinimumLength = 2)]
+    [Display(Name = "New surname")]
+    public string NewSurname { get; set; }
+}
+//-----------------------------
+
+
+public class AddPhoneNumberViewModel
     {
         [Required]
         [Phone]
