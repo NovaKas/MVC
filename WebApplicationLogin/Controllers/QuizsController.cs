@@ -62,14 +62,14 @@ namespace WebApplicationLogin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "QuizID,Name,Timer")] QuizViewModel quiz)
+        public ActionResult Create([Bind(Include = "Id,Name,Timer")] QuizViewModel quiz)
         {
             if (ModelState.IsValid)
             {
                 var model = new Quiz
                 {
                     Name = quiz.Name,
-                    QuizID = quiz.Timer
+                    Timer = quiz.Timer
                 };
                 db.Quizs.Add(model);
                 db.SaveChanges();
@@ -107,7 +107,7 @@ namespace WebApplicationLogin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "QuizID,Name,Timer")] QuizViewModel quiz)
+        public ActionResult Edit([Bind(Include = "Id,Name,Timer")] QuizViewModel quiz)
         {
             if (ModelState.IsValid)
             {
