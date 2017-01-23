@@ -11,6 +11,7 @@ namespace WebApplicationLogin.Models
     {
         [ForeignKey("user")]
         public string SClassID { get; set; }
+        [Display(Name = "Nazwa")]
         public string Name { get; set; }
 
         //zakomentowane w pierwszej wersji
@@ -21,10 +22,13 @@ namespace WebApplicationLogin.Models
         [Display(Name = "Wychowawca")]
         public string userID { get; set; }
         //public int TeacherID { get; set; } //wychowawca
-        
-
-        public virtual ICollection<Subject> Subjects { get; set; }
         public virtual ApplicationUser user { get; set; }
         //public virtual ICollection<ApplicationUser> Users { get; set; }
+
+
+        [Display(Name = "Lista przedmiotów:")]
+        public int PlanID { get; set; }
+        //public virtual ICollection<Subject> Subjects { get; set; }
+        public virtual Plan Plan { get; set; }
     }
 }

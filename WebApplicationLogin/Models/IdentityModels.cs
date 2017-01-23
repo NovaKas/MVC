@@ -60,7 +60,8 @@ namespace WebApplicationLogin.Models
         public DbSet<News> Newses { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Quiz> Quizs { get; set; }
-
+        public DbSet<Plan> Plans { get; set; }
+        public DbSet<PlanSubject> PlanSubjects { get; set; }
         //visualowa podpowiedz
         public IEnumerable ApplicationUsers { get; internal set; }
     }

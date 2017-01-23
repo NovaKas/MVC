@@ -10,113 +10,115 @@ using WebApplicationLogin.Models;
 
 namespace WebApplicationLogin.Controllers
 {
-    public class SClassesController : Controller
+    public class PlansController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: SClasses
+        // GET: Plans
         public ActionResult Index()
         {
-            var sClasses = db.SClasses.Include(s => s.user);
-            return View(sClasses.ToList());
+            return View(db.Plans.ToList());
         }
 
-        // GET: SClasses/Details/5
-        public ActionResult Details(string id)
+        // GET: Plans/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SClass sClass = db.SClasses.Find(id);
-            if (sClass == null)
+            Plan plan = db.Plans.Find(id);
+            if (plan == null)
             {
                 return HttpNotFound();
             }
-            return View(sClass);
+            return View(plan);
         }
 
-        // GET: SClasses/Create
+        // GET: Plans/Create
         public ActionResult Create()
         {
-            ViewBag.SClassID = new SelectList(db.ApplicationUsers, "Id", "Name");
+            ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "Name");
             return View();
         }
 
-        // POST: SClasses/Create
+        // POST: Plans/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SClassID,Name,userID")] SClass sClass)
+        public ActionResult Create([Bind(Include = "PlanID,Nazwa,SubjectID")] Plan plan)
         {
             if (ModelState.IsValid)
             {
-                db.SClasses.Add(sClass);
+                db.Plans.Add(plan);
+                PlanSubject PlanSubject = new PlanSubject();
+                PlanSubject.PlanID = plan.PlanID;
+                PlanSubject.SubjectID = plan.SubjectID;
+                db.PlanSubjects.Add(PlanSubject);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.SClassID = new SelectList(db.ApplicationUsers, "Id", "Name", sClass.SClassID);
-            return View(sClass);
+            ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "Name", plan.SubjectID);
+
+            return View(plan);
         }
 
-        // GET: SClasses/Edit/5
-        public ActionResult Edit(string id)
+        // GET: Plans/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            ViewBag.SubjectIDEditable = new SelectList(db.Subjects, "SubjectIDEditable", "Name");
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Plan plan = db.Plans.Find(id);
+            if (plan == null)
+            {
+                return HttpNotFound();
+            }
+            return View(plan);
+        }
+
+        // POST: Plans/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "PlanID,Nazwa,SubjectID")] Plan plan)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(plan).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(plan);
+        }
+
+        // GET: Plans/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SClass sClass = db.SClasses.Find(id);
-            if (sClass == null)
+            Plan plan = db.Plans.Find(id);
+            if (plan == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.SClassID = new SelectList(db.ApplicationUsers, "Id", "Name", sClass.SClassID);
-            return View(sClass);
+            return View(plan);
         }
 
-        // POST: SClasses/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SClassID,Name,userID")] SClass sClass)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(sClass).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.PlanID = new SelectList(db.Plans, "PlanID", "Nazwa", sClass.PlanID);
-            ViewBag.SClassID = new SelectList(db.ApplicationUsers, "Id", "Name", sClass.SClassID);
-            return View(sClass);
-        }
-
-        // GET: SClasses/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SClass sClass = db.SClasses.Find(id);
-            if (sClass == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sClass);
-        }
-
-        // POST: SClasses/Delete/5
+        // POST: Plans/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            SClass sClass = db.SClasses.Find(id);
-            db.SClasses.Remove(sClass);
+            Plan plan = db.Plans.Find(id);
+            db.Plans.Remove(plan);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,29 +1,28 @@
-﻿@model WebApplicationLogin.Models.Subject
+﻿@model WebApplicationLogin.Models.Plan
 
 @{
-    ViewBag.Title = "Usuń";
+    ViewBag.Title = "Delete";
 }
 
 
-
-<h3>Czy na pewno chcesz usunąć przedmiot z bazy?</h3>
+<h3>Czy na pewno chcesz usunąć przedmiot z listy?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Nazwa)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Nazwa)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FilePath)
+            @Html.DisplayNameFor(model => model.SubjectID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FilePath)
+            @Html.DisplayFor(model => model.SubjectID)
         </dd>
 
     </dl>
