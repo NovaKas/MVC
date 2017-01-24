@@ -1,4 +1,5 @@
-﻿@model WebApplicationLogin.Models.ViewModels.QuestionViewModel
+﻿@using WebApplicationLogin.Models.ViewModels
+@model QuestionViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -6,8 +7,10 @@
 
 <h2>Create</h2>
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
-@using (Html.BeginForm()) 
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
@@ -47,19 +50,12 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.userID, "userID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("userID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.userID, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
         <div class="form-group">
-            @Html.LabelFor(model => model.QuizId, "QuizId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.QuizIds, "QuizIds", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("QuizId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.QuizId, "", new { @class = "text-danger" })
+                @Html.DropDownList("QuizIds", new MultiSelectList(new List<QuizViewModel>(),"id", "name", Model.QuizIds), new { multiple = "multiple" })
+                @*@Html.DropDownList("QuizIds", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.QuizIds, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -78,3 +74,28 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script>
+    var getQuizsUrl = '@Url.Action("GetQuizs","Questions")';
+    function getQuizs() {
+        $.ajax({
+            type: 'GET',
+            url: getQuizsUrl,
+            datatype: "Json",
+            success: function (data) {
+                var ddl = $('#QuizIds');
+                ddl.empty();
+                $(data).each(function () {
+                    $("#QuizIds").html("");
+                    $.each(data, function (index, item) {
+                        ddl.append(new Option(item.Text, item.Value));
+                    });
+                });
+            }
+        });
+    }
+    $(document).ready(function () {
+        getQuizs();
+    });
+
+</script>

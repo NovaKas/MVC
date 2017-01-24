@@ -15,8 +15,7 @@ namespace WebApplicationLogin.Models
 
         public string userID { get; set; }
         public int QuizID { get; set; }
-
-        public virtual ApplicationUser user { get; set; }
-        public virtual Quiz Quiz { get; set; }
+        
+        public virtual List<Quiz> Quizs { get; set; }
     }
 }
