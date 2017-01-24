@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,110 +10,112 @@ using WebApplicationLogin.Models;
 
 namespace WebApplicationLogin.Controllers
 {
-    public class SubjectsController : Controller
+    public class StudentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Subjects
+        // GET: Students
         public ActionResult Index()
         {
-            return View(db.Subjects.ToList());
+            var students = db.Students.Include(s => s.SClass);
+            return View(students.ToList());
         }
 
-        // GET: Subjects/Details/5
+        // GET: Students/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Subject subject = db.Subjects.Find(id);
-            if (subject == null)
+            Student student = db.Students.Find(id);
+            if (student == null)
             {
                 return HttpNotFound();
             }
-            return View(subject);
+            return View(student);
         }
 
-        // GET: Subjects/Create
+        // GET: Students/Create
         public ActionResult Create()
         {
+            ViewBag.SClassID = new SelectList(db.SClasses, "SClassID", "Name");
             return View();
         }
 
-        // POST: Subjects/Create
+        // POST: Students/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]//[Bind(Include = "SubjectID,Name,MySubjectID,SClassID")]
-        public ActionResult Create([Bind(Include = "SubjectID,Name,FilePath")] Subject subject)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "StudentID,Name,SClassID")] Student student)
         {
             if (ModelState.IsValid)
             {
-                subject.FilePath = SaveFile(Request.Files[0]);
-
-                db.Subjects.Add(subject);
+                db.Students.Add(student);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(subject);
+            ViewBag.SClassID = new SelectList(db.SClasses, "SClassID", "Name", student.SClassID);
+            return View(student);
         }
 
-        // GET: Subjects/Edit/5
+        // GET: Students/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Subject subject = db.Subjects.Find(id);
-            if (subject == null)
+            Student student = db.Students.Find(id);
+            if (student == null)
             {
                 return HttpNotFound();
             }
-            return View(subject);
+            ViewBag.SClassID = new SelectList(db.SClasses, "SClassID", "Name", student.SClassID);
+            return View(student);
         }
 
-        // POST: Subjects/Edit/5
+        // POST: Students/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]//[Bind(Include = "SubjectID,Name,MySubjectID,SClassID")]
-        public ActionResult Edit([Bind(Include = "SubjectID,Name,FilePath")] Subject subject)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "StudentID,Name,SClassID")] Student student)
         {
             if (ModelState.IsValid)
             {
-                subject.FilePath = SaveFile(Request.Files[0]);
-                db.Entry(subject).State = EntityState.Modified;
+                db.Entry(student).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(subject);
+            ViewBag.SClassID = new SelectList(db.SClasses, "SClassID", "Name", student.SClassID);
+            return View(student);
         }
 
-        // GET: Subjects/Delete/5
+        // GET: Students/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Subject subject = db.Subjects.Find(id);
-            if (subject == null)
+            Student student = db.Students.Find(id);
+            if (student == null)
             {
                 return HttpNotFound();
             }
-            return View(subject);
+            return View(student);
         }
 
-        // POST: Subjects/Delete/5
+        // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Subject subject = db.Subjects.Find(id);
-            db.Subjects.Remove(subject);
+            Student student = db.Students.Find(id);
+            db.Students.Remove(student);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -126,14 +127,6 @@ namespace WebApplicationLogin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private string SaveFile(HttpPostedFileBase file)
-        {
-            string targetFolder = HttpContext.Server.MapPath("~/uploads");
-            string targetPath = Path.Combine(targetFolder, file.FileName);
-            file.SaveAs(targetPath);
-            return targetPath;
         }
     }
 }

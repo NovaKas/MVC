@@ -17,7 +17,7 @@ namespace WebApplicationLogin.Controllers
         // GET: SClasses
         public ActionResult Index()
         {
-            var sClasses = db.SClasses.Include(s => s.user);
+            var sClasses = db.SClasses.Include(s => s.Plan).Include(s => s.Teacher);
             return View(sClasses.ToList());
         }
 
@@ -39,7 +39,8 @@ namespace WebApplicationLogin.Controllers
         // GET: SClasses/Create
         public ActionResult Create()
         {
-            ViewBag.SClassID = new SelectList(db.ApplicationUsers, "Id", "Name");
+            ViewBag.PlanID = new SelectList(db.Plans, "PlanID", "Nazwa");
+            ViewBag.TeacherID = new SelectList(db.Teachers, "TeacherID", "Name");
             return View();
         }
 
@@ -48,7 +49,7 @@ namespace WebApplicationLogin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SClassID,Name,userID")] SClass sClass)
+        public ActionResult Create([Bind(Include = "SClassID,Name,TeacherID,PlanID")] SClass sClass)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +58,8 @@ namespace WebApplicationLogin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.SClassID = new SelectList(db.ApplicationUsers, "Id", "Name", sClass.SClassID);
+            ViewBag.PlanID = new SelectList(db.Plans, "PlanID", "Nazwa", sClass.PlanID);
+            ViewBag.TeacherID = new SelectList(db.Teachers, "TeacherID", "Name", sClass.TeacherID);
             return View(sClass);
         }
 
@@ -73,7 +75,8 @@ namespace WebApplicationLogin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.SClassID = new SelectList(db.ApplicationUsers, "Id", "Name", sClass.SClassID);
+            ViewBag.PlanID = new SelectList(db.Plans, "PlanID", "Nazwa", sClass.PlanID);
+            ViewBag.TeacherID = new SelectList(db.Teachers, "TeacherID", "Name", sClass.TeacherID);
             return View(sClass);
         }
 
@@ -82,7 +85,7 @@ namespace WebApplicationLogin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SClassID,Name,userID")] SClass sClass)
+        public ActionResult Edit([Bind(Include = "SClassID,Name,TeacherID,PlanID")] SClass sClass)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +94,7 @@ namespace WebApplicationLogin.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.PlanID = new SelectList(db.Plans, "PlanID", "Nazwa", sClass.PlanID);
-            ViewBag.SClassID = new SelectList(db.ApplicationUsers, "Id", "Name", sClass.SClassID);
+            ViewBag.TeacherID = new SelectList(db.Teachers, "TeacherID", "Name", sClass.TeacherID);
             return View(sClass);
         }
 

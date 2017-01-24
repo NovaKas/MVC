@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplicationLogin.Models;
 
 namespace WebApplicationLogin.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            return View();
+            var newses = db.Newses.OrderByDescending(n => n.NewsID);
+            return View(newses.ToList());
+          
         }
 
         public ActionResult About()

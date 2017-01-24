@@ -10,19 +10,17 @@ using WebApplicationLogin.Models;
 
 namespace WebApplicationLogin.Controllers
 {
-    [Authorize]
-    public class GradeListController : Controller
+    public class GradeListsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: GradeList
-        [AllowAnonymous]
+        // GET: GradeLists
         public ActionResult Index()
         {
             return View(db.GradeLists.ToList());
         }
 
-        // GET: GradeList/Details/5
+        // GET: GradeLists/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,14 +35,13 @@ namespace WebApplicationLogin.Controllers
             return View(gradeList);
         }
 
-        // GET: GradeList/Create
-        [Authorize(Roles = "Teacher")]
+        // GET: GradeLists/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: GradeList/Create
+        // POST: GradeLists/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -61,7 +58,7 @@ namespace WebApplicationLogin.Controllers
             return View(gradeList);
         }
 
-        // GET: GradeList/Edit/5
+        // GET: GradeLists/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -76,7 +73,7 @@ namespace WebApplicationLogin.Controllers
             return View(gradeList);
         }
 
-        // POST: GradeList/Edit/5
+        // POST: GradeLists/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -92,7 +89,7 @@ namespace WebApplicationLogin.Controllers
             return View(gradeList);
         }
 
-        // GET: GradeList/Delete/5
+        // GET: GradeLists/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,7 +104,7 @@ namespace WebApplicationLogin.Controllers
             return View(gradeList);
         }
 
-        // POST: GradeList/Delete/5
+        // POST: GradeLists/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

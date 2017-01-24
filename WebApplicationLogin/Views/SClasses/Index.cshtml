@@ -12,16 +12,15 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Plan.Nazwa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.user.Name)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.userID)
+            @*@Html.DisplayNameFor(model => model.Teacher.Name)*@
+            Wychowawca
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Plan.Nazwa)*@
+            Plan zajęć
         </th>
         <th></th>
     </tr>
@@ -29,16 +28,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Plan.Nazwa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.user.Name)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.userID)
+            @Html.DisplayFor(modelItem => item.Teacher.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Plan.Nazwa)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.SClassID }) |

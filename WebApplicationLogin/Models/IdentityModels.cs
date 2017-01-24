@@ -35,7 +35,7 @@ namespace WebApplicationLogin.Models
 
         public virtual ICollection<News> Newses { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
-        public virtual ICollection<MySubject> MySubjects { get; set; }
+        //public virtual ICollection<MySubject> MySubjects { get; set; }
         public virtual SClass SClass { get; set; }
         public virtual ICollection<Grade> Grades { get; set; }
     }
@@ -54,7 +54,7 @@ namespace WebApplicationLogin.Models
 
         public DbSet<GradeList> GradeLists { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-        public DbSet<MySubject> MySubjects { get; set; }
+        //public DbSet<MySubject> MySubjects { get; set; }
         public DbSet<SClass> SClasses { get; set; }
         public DbSet<Grade> Grades { get; set; }
         public DbSet<News> Newses { get; set; }
@@ -62,6 +62,8 @@ namespace WebApplicationLogin.Models
         public DbSet<Quiz> Quizs { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<PlanSubject> PlanSubjects { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Student> Students { get; set; }
         //visualowa podpowiedz
         public IEnumerable ApplicationUsers { get; internal set; }
     }

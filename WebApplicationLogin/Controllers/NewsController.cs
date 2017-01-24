@@ -17,6 +17,7 @@ namespace WebApplicationLogin.Controllers
         // GET: News
         public ActionResult Index()
         {
+
             var newses = db.Newses.Include(n => n.user);
             return View(newses.ToList());
         }

@@ -9,26 +9,22 @@ namespace WebApplicationLogin.Models
 {
     public class SClass
     {
-        [ForeignKey("user")]
-        public string SClassID { get; set; }
-        [Display(Name = "Nazwa")]
+
+        public int SClassID { get; set; }
+        [Display(Name = "Klasa")]
         public string Name { get; set; }
 
-        //zakomentowane w pierwszej wersji
-        //public int SubjectID { get; set; }
-        //public string StudentID { get; set; } 
-
-        //wychowawca
         [Display(Name = "Wychowawca")]
-        public string userID { get; set; }
-        //public int TeacherID { get; set; } //wychowawca
-        public virtual ApplicationUser user { get; set; }
-        //public virtual ICollection<ApplicationUser> Users { get; set; }
-
+        public int TeacherID { get; set; }
 
         [Display(Name = "Lista przedmiotów:")]
         public int PlanID { get; set; }
-        //public virtual ICollection<Subject> Subjects { get; set; }
+
         public virtual Plan Plan { get; set; }
+        public virtual Teacher Teacher { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
+
+
+
     }
 }

@@ -15,9 +15,30 @@ namespace WebApplicationLogin.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Grades
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            var grades = db.Grades.Include(g => g.GradeList).Include(g => g.user);
+            //var grades = db.Grades.Include(g => g.GradeList).Include(g => g.Student).Include(g => g.Subject);
+            //return View(grades.ToList());
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var grades = from s in db.Grades
+                         select s;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    grades = grades.OrderByDescending(s => s.StudentID);
+                    break;
+                case "Date":
+                    grades = grades.OrderBy(s => s.DateGrade);
+                    break;
+                case "date_desc":
+                    grades = grades.OrderByDescending(s => s.DateGrade);
+                    break;
+                default:
+                    grades = grades.OrderBy(s => s.GradeListID);
+                    break;
+            }
             return View(grades.ToList());
         }
 
@@ -40,7 +61,8 @@ namespace WebApplicationLogin.Controllers
         public ActionResult Create()
         {
             ViewBag.GradeListID = new SelectList(db.GradeLists, "GradeListID", "Name");
-            //ViewBag.userID = new SelectList(db.ApplicationUsers, "Id", "Name");
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "Name");
+            ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "Name");
             return View();
         }
 
@@ -49,7 +71,7 @@ namespace WebApplicationLogin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GradeID,Description,Weight,DateGrade,MySubjectID,userID,GradeListID")] Grade grade)
+        public ActionResult Create([Bind(Include = "GradeID,StudentID,GradeListID,Weight,Description,DateGrade,SubjectID")] Grade grade)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +81,8 @@ namespace WebApplicationLogin.Controllers
             }
 
             ViewBag.GradeListID = new SelectList(db.GradeLists, "GradeListID", "Name", grade.GradeListID);
-            //ViewBag.userID = new SelectList(db.ApplicationUsers, "Id", "Name", grade.userID);
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "Name", grade.StudentID);
+            ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "Name", grade.SubjectID);
             return View(grade);
         }
 
@@ -76,7 +99,8 @@ namespace WebApplicationLogin.Controllers
                 return HttpNotFound();
             }
             ViewBag.GradeListID = new SelectList(db.GradeLists, "GradeListID", "Name", grade.GradeListID);
-            //ViewBag.userID = new SelectList(db.ApplicationUsers, "Id", "Name", grade.userID);
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "Name", grade.StudentID);
+            ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "Name", grade.SubjectID);
             return View(grade);
         }
 
@@ -85,7 +109,7 @@ namespace WebApplicationLogin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "GradeID,Description,Weight,DateGrade,MySubjectID,userID,GradeListID")] Grade grade)
+        public ActionResult Edit([Bind(Include = "GradeID,StudentID,GradeListID,Weight,Description,DateGrade,SubjectID")] Grade grade)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +118,8 @@ namespace WebApplicationLogin.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.GradeListID = new SelectList(db.GradeLists, "GradeListID", "Name", grade.GradeListID);
-            //ViewBag.userID = new SelectList(db.ApplicationUsers, "Id", "Name", grade.userID);
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "Name", grade.StudentID);
+            ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "Name", grade.SubjectID);
             return View(grade);
         }
 

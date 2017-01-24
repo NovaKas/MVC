@@ -7,13 +7,13 @@ namespace WebApplicationLogin.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Add_file_pathEdu_column_to_Mysubject_table : IMigrationMetadata
+    public sealed partial class third_chance : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_file_pathEdu_column_to_Mysubject_table));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(third_chance));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701222017223_Add_file_pathEdu_column_to_Mysubject_table"; }
+            get { return "201701240209203_third_chance"; }
         }
         
         string IMigrationMetadata.Source
