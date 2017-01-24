@@ -118,66 +118,66 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>Powtórz hasło</value>
+    <value>Confirm password</value>
   </data>
   <data name="eDziennik" xml:space="preserve">
-    <value>eDziennik</value>
-  </data>
-  <data name="e_Dziennik" xml:space="preserve">
-    <value>e-Dziennik</value>
+    <value>eRegister</value>
   </data>
   <data name="ForgotYourPassword" xml:space="preserve">
-    <value>Zapomniałeś hasła?</value>
-  </data>
-  <data name="Internetowydziennik" xml:space="preserve">
-    <value>Internetowy dziennik</value>
-  </data>
-  <data name="Language" xml:space="preserve">
-    <value>Język</value>
+    <value>Forgot your password?</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Imię</value>
-  </data>
-  <data name="Nauczyciel" xml:space="preserve">
-    <value>Nauczyciel</value>
+    <value>Name</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Hasło</value>
+    <value>Password</value>
   </data>
   <data name="Registerasanewuser" xml:space="preserve">
-    <value>Zarejestruj mnie jako nowego użytkownika</value>
+    <value>Register as a new user</value>
   </data>
   <data name="Remember" xml:space="preserve">
-    <value>Zapamiętaj mnie</value>
-  </data>
-  <data name="Rodzic" xml:space="preserve">
-    <value>Rodzic</value>
-  </data>
-  <data name="Sekcjadlanauczycieli" xml:space="preserve">
-    <value>Sekcja dla nauczycieli</value>
-  </data>
-  <data name="Sekcjadlarodziców" xml:space="preserve">
-    <value>Sekcja dla rodziców</value>
-  </data>
-  <data name="Sekcjadlauczniów" xml:space="preserve">
-    <value>Sekcja dla uczniów</value>
-  </data>
-  <data name="Student" xml:space="preserve">
-    <value>Uczeń</value>
+    <value>Remember me</value>
   </data>
   <data name="Surname" xml:space="preserve">
-    <value>Nazwisko</value>
+    <value>Surname</value>
   </data>
   <data name="Username" xml:space="preserve">
-    <value>Login</value>
+    <value>Username</value>
+  </data>
+  <data name="e_Dziennik" xml:space="preserve">
+    <value>e-Register</value>
+  </data>
+  <data name="Internetowydziennik" xml:space="preserve">
+    <value>Web register</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Nauczyciel" xml:space="preserve">
+    <value>Teacher</value>
+  </data>
+  <data name="Rodzic" xml:space="preserve">
+    <value>Parent</value>
+  </data>
+  <data name="Sekcjadlanauczycieli" xml:space="preserve">
+    <value>Section for teachers</value>
+  </data>
+  <data name="Sekcjadlarodziców" xml:space="preserve">
+    <value>Section for parents</value>
+  </data>
+  <data name="Sekcjadlauczniów" xml:space="preserve">
+    <value>Section for pupils</value>
+  </data>
+  <data name="Student" xml:space="preserve">
+    <value>Pupil</value>
   </data>
   <data name="Zaloguj" xml:space="preserve">
-    <value>Zaloguj</value>
+    <value>Log in</value>
   </data>
   <data name="Zobacz" xml:space="preserve">
-    <value>Zobacz</value>
+    <value>More</value>
   </data>
 </root>

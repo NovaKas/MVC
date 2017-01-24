@@ -19,22 +19,26 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink(WebApplicationLogin.Resources.HomeLang.eDziennik, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("eDziennik", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="collapse navbar-collapse navbar-menubuilder">
-                @*<ul class="nav navbar-nav navbar-left">
-                </ul>*@
+                <ul class="nav navbar-nav navbar-left">
+                    <li>@Html.ActionLink("Uczniowie", "Index", "Students", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
+                    <li>@Html.ActionLink("Klasy", "Index", "SClassed", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
+                    <li>@Html.ActionLink("Oceny", "Index", "Grades", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
+                    <li>@Html.ActionLink("Plan", "Index", "Plans", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
+                    <li>@Html.ActionLink("Wiadomości", "Index", "News", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
+                    <li>@Html.ActionLink("Quiz", "Index", "Quizs", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
+                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - eDziennik Kasia &amp; Paulina</p>
-            @Html.ActionLink(WebApplicationLogin.Resources.HomeLang.Language, "Index", "Language")
         </footer>
     </div>
 

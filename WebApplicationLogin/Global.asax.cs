@@ -32,8 +32,8 @@ namespace WebApplicationLogin
             else
             {
 
-                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("En");
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("En");
+                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("De");
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("De");
             }
         }
     }

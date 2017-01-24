@@ -3,20 +3,30 @@
 }
 
 
-<h2>Create Role</h2>
-@Html.ActionLink("List Roles", "Index") | @Html.ActionLink("Manage User Role", "ManageUserRoles")
+<h2>Dodawanie roli</h2>
+@Html.ActionLink("Lista", "Index") | @Html.ActionLink("Zarządzanie", "ManageUserRoles")
 <hr />
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
-    <div>
-        Role name
+    <div class="form-horizontal">
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <p class="control-label col-md-2">Nazwa roli</p>
+                <div class="col-md-10">
+                    @Html.TextBox("RoleName")
+                </div>
+            </div>
+        </div>
     </div>
-    <p>
-        @Html.TextBox("RoleName")
-    </p>
-    <input type="submit" value="Save" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Dodaj" class="btn btn-default" />
+            </div>
+        </div>
+
 }
+
 @ViewBag.ResultMessage

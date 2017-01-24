@@ -2,28 +2,30 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron" style="margin-top:10px; background-color:ghostwhite">
-    <h1>e-Dziennik</h1>
-    <p class="lead">Internetowy dziennik</p>
-    <p><a href="~/Account/Login" class="btn btn-default">Zobacz więcej &raquo;</a></p>
+<div class="jumbotron" style="margin-top:10px; background-color:#CFE5C2">
+    <h1>@Html.Label(WebApplicationLogin.Resources.HomeLang.e_Dziennik)</h1>
+    <p class="lead">@Html.Label(WebApplicationLogin.Resources.HomeLang.Internetowydziennik)</p>
+    <div style="float:right; margin-top:-90px">
+        <img src="~/Content/hut.png" style="width:300px;height:328px;" />
+    </div>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Nauczyciel</h2>
+    <div class="col-md-2">
+        <h2>@Html.Label(WebApplicationLogin.Resources.HomeLang.Nauczyciel)</h2>
         <p>
-            Sekcja dla nauczycieli
+            @Html.Label(WebApplicationLogin.Resources.HomeLang.Sekcjadlanauczycieli)
         </p>
-        <p><a class="btn btn-default" href="~/Account/Login">Zobacz &raquo;</a></p>
+        <p><a class="btn btn-default" href="~/Account/Login">@Html.Label(WebApplicationLogin.Resources.HomeLang.Zobacz) &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Rodzic</h2>
-        <p>Sekcja dla rodziców</p>
-        <p><a class="btn btn-default" href="~/Account/Login">Zobacz &raquo;</a></p>
+    <div class="col-md-2">
+        <h2>@Html.Label(WebApplicationLogin.Resources.HomeLang.Rodzic)</h2>
+        <p>@Html.Label(WebApplicationLogin.Resources.HomeLang.Sekcjadlarodziców)</p>
+        <p><a class="btn btn-default" href="~/Account/Login">@Html.Label(WebApplicationLogin.Resources.HomeLang.Zobacz) &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Uczeń</h2>
-        <p>Sekcja dla uczniów</p>
-        <p><a class="btn btn-default" href="~/Account/Login">Zobacz &raquo;</a></p>
+    <div class="col-md-2">
+        <h2>@Html.Label(WebApplicationLogin.Resources.HomeLang.Student)</h2>
+        <p>@Html.Label(WebApplicationLogin.Resources.HomeLang.Sekcjadlauczniów)</p>
+        <p><a class="btn btn-default" href="~/Account/Login">@Html.Label(WebApplicationLogin.Resources.HomeLang.Zobacz) &raquo;</a></p>
     </div>
 </div>

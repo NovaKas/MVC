@@ -123,9 +123,6 @@
   <data name="eDziennik" xml:space="preserve">
     <value>eDziennik</value>
   </data>
-  <data name="e_Dziennik" xml:space="preserve">
-    <value>e-Dziennik</value>
-  </data>
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Zapomniałeś hasła?</value>
   </data>
@@ -174,10 +171,16 @@
   <data name="Username" xml:space="preserve">
     <value>Login</value>
   </data>
-  <data name="Zaloguj" xml:space="preserve">
-    <value>Zaloguj</value>
-  </data>
   <data name="Zobacz" xml:space="preserve">
     <value>Zobacz</value>
+  </data>
+  <data name="e_Dziennik" xml:space="preserve">
+    <value>e-Dziennik</value>
+  </data>
+  <data name="Internetowydziennik1" xml:space="preserve">
+    <value>Internetowy dziennik</value>
+  </data>
+  <data name="Zaloguj" xml:space="preserve">
+    <value>Zaloguj</value>
   </data>
 </root>
