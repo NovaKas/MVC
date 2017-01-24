@@ -142,6 +142,15 @@ namespace WebApplicationLogin.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ogłoszenia.
+        /// </summary>
+        public static string Ogloszenia {
+            get {
+                return ResourceManager.GetString("Ogloszenia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hasło.
         /// </summary>
         public static string Password {

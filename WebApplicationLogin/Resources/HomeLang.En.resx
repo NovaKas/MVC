@@ -180,4 +180,7 @@
   <data name="Zobacz" xml:space="preserve">
     <value>More</value>
   </data>
+  <data name="Ogloszenia" xml:space="preserve">
+    <value>Annoucement</value>
+  </data>
 </root>

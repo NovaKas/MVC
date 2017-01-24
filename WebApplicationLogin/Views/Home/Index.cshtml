@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<WebApplicationLogin.Models.News>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -9,7 +10,6 @@
         <img src="~/Content/hut.png" style="width:300px;height:328px;" />
     </div>
 </div>
-
 <div class="row">
     <div class="col-md-2">
         <h2>@Html.Label(WebApplicationLogin.Resources.HomeLang.Nauczyciel)</h2>
@@ -28,4 +28,22 @@
         <p>@Html.Label(WebApplicationLogin.Resources.HomeLang.Sekcjadlauczniów)</p>
         <p><a class="btn btn-default" href="~/Account/Login">@Html.Label(WebApplicationLogin.Resources.HomeLang.Zobacz) &raquo;</a></p>
     </div>
+</div>
+<div>
+    
+        <h2>@Html.Label(WebApplicationLogin.Resources.HomeLang.Ogloszenia)</h2>
+    <table class="table">
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+            </tr>
+        }
+        </table>
 </div>

@@ -180,4 +180,7 @@
   <data name="Zobacz" xml:space="preserve">
     <value>ビュー</value>
   </data>
+  <data name="Ogloszenia" xml:space="preserve">
+    <value>ニュース</value>
+  </data>
 </root>
