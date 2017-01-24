@@ -234,6 +234,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cup.png" />
+    <Content Include="Content\emailconfirm.png" />
     <Content Include="Content\hut.png" />
     <Content Include="Content\registercss.css" />
     <Content Include="favicon.ico" />

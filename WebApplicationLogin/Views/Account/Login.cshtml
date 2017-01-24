@@ -48,9 +48,9 @@
                         <input type="submit" value="Zaloguj" class="btn btn-default" />
                     </div>
                 </div>
-                <p>
+                @*<p>
                     @Html.ActionLink(WebApplicationLogin.Resources.HomeLang.Registerasanewuser, "Register")
-                </p>
+                </p>*@
                  //Enable this once you have account confirmation enabled for password reset functionality
                     <p>
                         @Html.ActionLink(WebApplicationLogin.Resources.HomeLang.ForgotYourPassword, "ForgotPassword")
@@ -58,11 +58,11 @@
             }
         </section>
     </div>
-    <div class="col-md-4">
+    @*<div class="col-md-4">
         <section id="socialLoginForm">
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
-    </div>
+    </div>*@
 </div>
 
 @section Scripts {
