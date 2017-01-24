@@ -15,7 +15,7 @@ namespace WebApplicationLogin.Helpers
         {
             if(!context.Roles.Any())
             {
-                var defaultRoles = new List<string>() { "Teacher" , "Student", "Parent" };
+                var defaultRoles = new List<string>() {"Admin", "Teacher" , "Student", "Parent" };
                 for(int i=0; i< defaultRoles.Count(); ++i)
                 {
                     context.Roles.Add(new IdentityRole
