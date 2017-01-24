@@ -60,7 +60,7 @@ namespace WebApplicationLogin.Controllers
                 Points = question.Points
             };
 
-            return View(question);
+            return View(model);
         }
 
         // GET: Questions/Create

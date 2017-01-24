@@ -157,6 +157,15 @@ namespace WebApplicationLogin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Quiz quiz = db.Quizs.Find(id);
+
+            // Remove quiz from Questions
+            var questions = db.Questions.Where(x => x.Quizs.Contains(quiz));
+            foreach(var item in questions)
+            {
+                item.Quizs.Remove(quiz);
+            }
+
+            // Remove quiz
             db.Quizs.Remove(quiz);
             db.SaveChanges();
             return RedirectToAction("Index");
